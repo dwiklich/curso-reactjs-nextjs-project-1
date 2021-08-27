@@ -50,6 +50,13 @@ class App extends Component {
     }, 2000);
   };
 
+  /*
+    Link para diagrama: React Lifecycle Methods Diagram
+
+     https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+  */
+
   // componentDidMount -> atualiza uma vez o estado do componente assim que renderiza
   componentDidMount() {
     // setInterval fica atualizando o componente com o tempo inserido na function setInterval. Se transforma num compomentDidUpdate
