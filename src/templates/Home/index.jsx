@@ -39,11 +39,6 @@ export class Home extends Component {
     const nextPage = page + postsPerPage;
     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
 
-    if (!nextPosts.length) {
-      document.querySelector("aa");
-      return;
-    }
-
     this.setState({
       page: nextPage,
       posts: [...posts, ...nextPosts],
@@ -59,7 +54,6 @@ export class Home extends Component {
         <Posts posts={posts}></Posts>
         <div className="button-container">
           <Button
-            className="aa"
             disabled={noMorePosts}
             onClick={this.loadMorePosts}
             text="Load more posts"
