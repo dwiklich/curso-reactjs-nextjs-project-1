@@ -4,95 +4,51 @@ import { Component } from "react";
 
 class App extends Component {
   state = {
-    counter: 0,
-    posts: [
-      {
-        id: 1,
-        title: "O titulo 1111",
-        body: "O corpo 1",
-      },
-      {
-        id: 2,
-        title: "O titulo 2",
-        body: "O corpo 2",
-      },
-      {
-        id: 3,
-        title: "O titulo 3",
-        body: "O corpo 3",
-      },
-      {
-        id: 4,
-        title: "O titulo 4",
-        body: "O corpo 4",
-      },
-      {
-        id: 5,
-        title: "O titulo 5",
-        body: "O corpo 5",
-      },
-    ],
-  };
-  timeOutUpdate = null;
-
-  handleTimeOut = () => {
-    setTimeout(() => {
-      const { posts, counter } = this.state;
-      posts[0].title = "O título mudou";
-
-      console.log("Montado componente");
-      // console.log(`counter: ${this.state.counter}`);
-
-      this.setState({
-        counter: counter + 1,
-        posts: [...posts],
-      });
-    }, 2000);
+    posts: [],
   };
 
-  /*
-    Link para diagrama: React Lifecycle Methods Diagram
-
-     https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
-
-  */
-
-  // componentDidMount -> atualiza uma vez o estado do componente assim que renderiza
   componentDidMount() {
-    // setInterval fica atualizando o componente com o tempo inserido na function setInterval. Se transforma num compomentDidUpdate
-    // setInterval(() => {
-    //   console.log("Componente atulizando a cada 2 segundos");
-    // }, 2000);
-
-    this.handleTimeOut();
-
-    console.log("Componente apos handleTimeOut");
+    this.loadPosts();
   }
 
-  // componentDidUpdate -> atualiza o estado do componente a cada segundo
-  componentDidUpdate() {
-    this.handleTimeOut();
-  }
+  loadPosts = async () => {
+    const postsResponse = fetch("https://jsonplaceholder.typicode.com/posts");
 
-  // componentWillUnmount -> executa toda vez que o componente for criado ou atualizado
-  componentWillUnmount() {
-    // limpa o cache do react pois pode ficar cache e bugar o componente
-    clearTimeout(this.timeOutUpdate);
-  }
+    const photosResponse = fetch("https://jsonplaceholder.typicode.com/photos");
+
+    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
+
+    const postsJson = await posts.json();
+    const photosJson = await photos.json();
+
+    // zip de array
+    const postsAndPhotos = postsJson.map((post, index) => {
+      return { ...post, cover: photosJson[index].url };
+    });
+
+    this.setState({ posts: postsAndPhotos });
+  };
 
   render() {
-    const { posts, counter } = this.state;
+    const { posts } = this.state;
 
     return (
-      <div className="App">
-        <p>counter: {counter}</p>
-        {posts.map((post) => (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-          </div>
-        ))}
-      </div>
+      <section className="container">
+        <div className="posts">
+          {posts.map((post) => (
+            <div className="post" key={post.id}>
+              <div className="photo-card">
+                <img src={post.cover} alt={post.title} className="photo" />
+              </div>
+              <div className="post-content">
+                <h1>{post.title}</h1>
+
+                <p>{post.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     );
   }
 }
