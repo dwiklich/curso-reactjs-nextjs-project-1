@@ -1,4 +1,4 @@
-import "./index.css";
+import "./styles.css";
 
 export const PostCard = ({ cover, title, body }) => {
   return (
@@ -7,7 +7,7 @@ export const PostCard = ({ cover, title, body }) => {
         <img src={cover} alt={title} className="photo" />
       </div>
       <div className="post-content">
-        <h1>{title}</h1>
+        <h2>{title}</h2>
         <p>{body}</p>
       </div>
     </div>
