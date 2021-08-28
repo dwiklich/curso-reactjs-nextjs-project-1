@@ -10,6 +10,7 @@ export const Posts = ({ posts }) => {
           title={post.title}
           body={post.body}
           cover={post.cover}
+          id={post.id}
           key={post.id}
         />
       ))}
