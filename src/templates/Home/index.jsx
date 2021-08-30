@@ -14,6 +14,8 @@ export class Home extends Component {
     page: 0,
     postsPerPage: 2,
     searchValue: "",
+    componentMontado: 0,
+    componentAtualizado: 0,
   };
 
   async componentDidMount() {

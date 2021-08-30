@@ -3,8 +3,6 @@ import { FcSearch } from "react-icons/fc";
 import "./styles.css";
 
 export const TextInput = ({ searchValue, handleChange }) => {
-  const disableIcon = !!searchValue ? "icon" : "icon-disable";
-  console.log(searchValue);
   return (
     <>
       <input
