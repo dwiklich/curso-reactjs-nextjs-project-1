@@ -1,6 +1,7 @@
-import { FcSearch } from "react-icons/fc";
+import { FcSearch } from 'react-icons/fc';
+import P from 'prop-types';
 
-import "./styles.css";
+import './styles.css';
 
 export const TextInput = ({ searchValue, handleChange }) => {
   return (
@@ -14,9 +15,14 @@ export const TextInput = ({ searchValue, handleChange }) => {
         value={searchValue}
         placeholder="Type your search"
       ></input>
-      <div className={searchValue === "" ? "icon-container" : "icon-disable"}>
+      <div className={searchValue === '' ? 'icon-container' : 'icon-disable'}>
         <FcSearch />
       </div>
     </>
   );
+};
+
+TextInput.propTypes = {
+  searchValue: P.string.isRequired,
+  handleChange: P.func.isRequired,
 };

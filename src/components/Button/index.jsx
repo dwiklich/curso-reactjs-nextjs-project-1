@@ -1,8 +1,9 @@
 // import { Component } from "react";
+import P from 'prop-types';
 
-import "./styles.css";
+import './styles.css';
 
-export const Button = ({ text, onClick, disabled }) => {
+export const Button = ({ text, onClick, disabled = false }) => {
   return (
     <button disabled={disabled} onClick={onClick} className="button">
       {text}
@@ -10,14 +11,14 @@ export const Button = ({ text, onClick, disabled }) => {
   );
 };
 
-// export class Button2 extends Component {
-//   render() {
-//     const { text, onClick, disabled } = this.props;
+//dando valor default em JS
+Button.defaultProps = {
+  disabled: false,
+};
 
-//     return (
-//       <button disabled={disabled} onClick={onClick} className="button">
-//         {text}
-//       </button>
-//     );
-//   }
-// }
+//dando valor propTypes em JS
+Button.propTypes = {
+  text: P.string.isRequired,
+  onClick: P.func.isRequired,
+  disabled: P.bool,
+};
