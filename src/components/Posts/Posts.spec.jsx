@@ -29,4 +29,17 @@ describe('<Posts />', () => {
     const { container } = render(<Posts {...props} />);
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  test('should name of prop "posts" value default equal []', () => {
+    const { container, debug } = render(<Posts />);
+
+    expect(screen.queryAllByRole('heading')).toHaveLength(0);
+    expect(screen.queryAllByRole('img')).toHaveLength(0);
+    expect(screen.queryAllByText(/body post/i)).toHaveLength(0);
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    expect(container.querySelector('.posts')).toHaveClass('posts');
+    expect(container.querySelector('.posts')).toBeInTheDocument();
+    debug();
+  });
 });

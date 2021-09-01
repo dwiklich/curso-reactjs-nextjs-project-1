@@ -41,6 +41,17 @@ describe('<Button />', () => {
     expect(screen.getByRole('button')).toBeEnabled();
   });
 
+  it('should name of prop "disabled" value default equal false', () => {
+    const fn = jest.fn();
+    const { debug } = render(<Button text="Load more" onClick={fn} />);
+    const button = screen.getByRole('button');
+    // const tem = button.hasAttribute('disabled');
+    // console.log(tem);
+    expect(button).toHaveProperty('disabled', false);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+    debug();
+  });
+
   it('should match snapshot', () => {
     const fn = jest.fn();
     render(<Button text="Load more" onClick={fn} disabled={false} />);
